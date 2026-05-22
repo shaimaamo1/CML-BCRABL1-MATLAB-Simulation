@@ -1,86 +1,60 @@
-# MATLAB-Based Numerical Simulation of BCR-ABL1 Expression Dynamics and Targeted Therapy Response in CML
+# MATLAB-Based Numerical Simulation of BCR-ABL1 Expression Dynamics and Targeted Therapy Response in Chronic Myeloid Leukemia
 
 [![MATLAB](https://img.shields.io/badge/MATLAB-Numerical%20Modeling-orange?style=flat-square)](MATLAB_Code/CML_Numerical_Project.m)
 [![Cancer Modeling](https://img.shields.io/badge/Cancer%20Modeling-CML-red?style=flat-square)](#)
 [![Computational Biology](https://img.shields.io/badge/Computational%20Biology-Gene%20Expression-blue?style=flat-square)](#)
+[![GEO](https://img.shields.io/badge/GEO-GSE33075-green?style=flat-square)](#)
 [![Status](https://img.shields.io/badge/Status-Completed-brightgreen?style=flat-square)](#)
 
 ## Project Overview
 
-This project presents a MATLAB-based computational biology workflow for simulating **BCR-ABL1-related expression dynamics** and targeted therapy response in **Chronic Myeloid Leukemia (CML)**.
+This project presents a MATLAB-based computational and numerical simulation of **BCR-ABL1 expression dynamics** in **Chronic Myeloid Leukemia (CML)**. The project models the behavior of BCR-ABL1 mRNA and protein/activity levels under three biological conditions: normal cells, untreated CML cells, and treated CML cells.
 
-The project combines numerical modeling, ordinary differential equations, Euler’s Method, RK4 Method, MATLAB `ode45`, gene expression analysis, differential expression visualization, and treatment-response simulation.
+The biological focus of the project is based on the role of the **BCR-ABL1 gene** in CML, where its abnormal tyrosine kinase activity promotes excessive survival and growth of myeloid cells. The project also incorporates a treatment-response scenario using **tyrosine kinase inhibitor-like inhibition**, inspired by imatinib treatment data from the public GEO dataset **GSE33075**.
 
-The biological motivation is based on the role of **BCR-ABL1**, the oncogenic fusion driver of CML. BCR-ABL1 produces abnormal tyrosine kinase activity that supports leukemic cell survival and proliferation. In this simplified model, targeted therapy is represented as a treatment effect that reduces leukemic cell dynamics over time.
+## Project Aim
 
----
+The main aim of this project was to model **BCR-ABL1 mRNA and protein/activity dynamics** in:
 
-## Aim of the Project
+- Normal cells
+- Untreated CML cells
+- Treated CML cells
 
-The aim of this project was to develop a reproducible MATLAB workflow that can:
-
-- simulate leukemic cell behavior under treatment,
-- compare healthy and CML-related expression behavior,
-- apply numerical methods to a biomedical ODE system,
-- analyze gene expression differences between biological groups,
-- generate clear scientific figures for interpretation.
-
----
+The expected biological behavior was that normal cells would show the lowest BCR-ABL1 activity, untreated CML cells would show the highest activity, and treated CML cells would show reduced activity after therapy.
 
 ## Biological Background
 
 Chronic Myeloid Leukemia is strongly associated with the **Philadelphia chromosome**, which creates the **BCR-ABL1 fusion gene**. This fusion gene encodes an abnormal tyrosine kinase that activates pathways involved in uncontrolled cell growth and survival.
 
-Targeted therapies such as imatinib are designed to inhibit BCR-ABL1 kinase activity. In this project, the treatment response is represented computationally by reducing leukemic cell survival and observing the downstream effect on a BCR-ABL1-related mRNA signal.
-
----
+Targeted therapies such as imatinib are designed to inhibit BCR-ABL1 kinase activity. In this project, the treatment response is represented computationally by reducing BCR-ABL1-related activity over time.
 
 ## Mathematical Model
 
-The model uses three state variables:
+The model uses two main biological variables:
 
 | Variable | Meaning |
 |---|---|
-| `x(t)` | Leukemic cell population |
-| `y(t)` | Healthy cell population |
-| `m(t)` | BCR-ABL1-related mRNA expression signal |
+| `M(t)` | BCR-ABL1 mRNA level |
+| `P(t)` | BCR-ABL1 protein/activity level |
 
-The system models leukemic cell growth, leukemic cell death, healthy cell growth, competition between leukemic and healthy cells, mRNA production related to leukemic burden, mRNA degradation, and treatment-induced reduction in leukemic cell dynamics.
-
-The treatment parameter is represented by `u`, where higher values indicate stronger treatment effect.
-
----
+The model assumes that mRNA dynamics depend on synthesis and decay, while protein/activity dynamics depend on synthesis, decay, and treatment inhibition. The treatment effect was represented using an inhibition term affecting the protein/activity level.
 
 ## Numerical Methods
 
+The project applied MATLAB-based numerical simulation approaches:
+
 | Method | Role in the Project |
 |---|---|
-| Euler’s Method | Basic step-by-step numerical approximation |
-| RK4 Method | More accurate fixed-step ODE simulation |
-| MATLAB `ode45` | Built-in adaptive solver used as a reference |
+| Euler’s Method | Step-by-step numerical approximation of the model behavior |
+| MATLAB `ode45` | Adaptive ODE solver used to simulate the system over time |
 
-The project compares these methods to show how different numerical approaches approximate the same biological system.
+The simulation was performed over time to compare BCR-ABL1 mRNA and protein/activity levels across normal, untreated CML, and treated CML scenarios.
 
----
+## Transcriptomic Data Analysis
 
-## Gene Expression Analysis Component
+The project also included analysis of the public GEO transcriptomic dataset **GSE33075**. The dataset contains samples from healthy controls, CML patients before treatment, and CML patients after one month of imatinib treatment.
 
-The MATLAB script can load a gene expression matrix from CSV or Excel format. If no dataset is found, the script creates a small demo expression dataset automatically so that the complete workflow can still run.
-
-The analysis includes data loading, metadata creation, missing value handling, optional log2 transformation, differential expression analysis, Benjamini-Hochberg adjusted p-values, volcano plot generation, top-gene bar plot, and heatmap visualization.
-
-Default accepted dataset file names:
-
-```text
-GSE33075_expression.csv
-GSE33075_expression.xlsx
-gene_expression.csv
-gene_expression.xlsx
-expression_data.csv
-expression_data.xlsx
-```
-
----
+Expression values were imported into MATLAB, grouped by condition, and compared to identify genes that decreased after treatment. This supported the treatment-response scenario represented in the numerical model.
 
 ## Repository Structure
 
@@ -99,81 +73,63 @@ CML-BCRABL1-MATLAB-Simulation/
     └── project_summary.md
 ```
 
----
-
 ## How to Run
 
 1. Open MATLAB.
-2. Open the script:
+2. Open the main script:
 
 ```text
 MATLAB_Code/CML_Numerical_Project.m
 ```
 
-3. Optional: place the expression dataset file in the same folder as the MATLAB script.
+3. Optional: place the processed gene expression dataset file in the same folder as the MATLAB script.
 4. Press **Run**.
-5. The script will create an output folder called:
+5. The script will generate simulation outputs and figures.
 
-```text
-Project_Output/
-```
+If no dataset is provided, the script can still run using a small demo expression dataset.
 
-If no dataset is provided, the script will generate a demo dataset automatically.
+## Expected Outputs
 
----
-
-## Generated Outputs
-
-| Output File | Description |
+| Output type | Examples |
 |---|---|
-| `Differential_Expression_Results.xlsx` | Gene-level differential expression results |
-| `Treatment_Scenario_Summary.xlsx` | Final model values under different treatment strengths |
-| `Project_Summary.txt` | Short numerical and biological summary |
-
----
-
-## Generated Figures
-
-| Figure | Description |
-|---|---|
-| `Figure_1_sample_expression_boxplot.png` | Expression distribution across samples |
-| `Figure_2_sample_mean_expression.png` | Mean expression per sample |
-| `Figure_3_volcano_plot.png` | Differential expression volcano plot |
-| `Figure_4_top_DE_genes_barplot.png` | Top differentially expressed genes |
-| `Figure_5_top_genes_heatmap.png` | Heatmap of top genes |
-| `Figure_6_CML_dynamics_RK4.png` | CML dynamics using RK4 |
-| `Figure_7_numerical_methods_comparison.png` | Euler, RK4, and ode45 comparison |
-| `Figure_8_treatment_scenarios.png` | Treatment-strength comparison |
-
----
+| Numerical simulation | BCR-ABL1 mRNA and protein/activity curves |
+| Treatment comparison | Normal vs untreated CML vs treated CML dynamics |
+| Solver comparison | Euler’s Method and ode45 simulation behavior |
+| Gene expression analysis | Downregulated genes after treatment |
+| Scientific visualization | Line plots, treatment-response plots, expression plots |
 
 ## Key Results
 
-The simulation demonstrates that untreated CML-like conditions show higher leukemic activity, treatment reduces leukemic cell burden in the numerical model, stronger treatment values produce lower final leukemic cell levels, BCR-ABL1-related mRNA signal decreases indirectly as leukemic burden decreases, and differential expression analysis can identify genes altered between disease and reference conditions.
+The simulation showed that:
 
----
+- Normal cells had low BCR-ABL1 mRNA and protein/activity levels.
+- Untreated CML cells showed the highest BCR-ABL1 protein/activity levels.
+- Treated CML cells showed reduced protein/activity due to the treatment inhibition term.
+- Increasing treatment strength led to progressively lower BCR-ABL1 activity.
+- GEO transcriptomic analysis identified downregulated genes after treatment, supporting the treatment-response scenario.
 
-## Skills Demonstrated
+## Tools and Skills Used
 
-- MATLAB programming
-- Numerical analysis
+- MATLAB
+- Numerical Analysis
 - Euler’s Method
-- RK4 Method
-- MATLAB `ode45`
-- ODE-based biomedical modeling
-- Differential expression analysis
-- Benjamini-Hochberg correction
-- Scientific visualization
-- Computational cancer biology
-- Reproducible project documentation
+- `ode45` ODE Solver
+- Gene Expression Analysis
+- GEO Dataset Analysis
+- Mathematical Modeling
+- Biomedical Simulation
+- Chronic Myeloid Leukemia Biology
+- BCR-ABL1 Expression Dynamics
+- Treatment Response Modeling
+- Scientific Data Visualization
 
----
+## Conclusion
 
-## Professional Summary
+This project demonstrated how numerical methods and computational biology can be integrated to study cancer-related gene expression behavior. By combining mathematical modeling, MATLAB simulation, and transcriptomic data analysis, the project provided a simplified computational representation of BCR-ABL1 dynamics in CML and showed how targeted therapy may reduce leukemic activity over time.
 
-This project demonstrates how numerical analysis and computational biology can be combined to model cancer-related molecular dynamics and targeted therapy response. By integrating ODE simulation, gene expression analysis, and MATLAB-based visualization, the project provides a reproducible example of biomedical modeling applied to BCR-ABL1-driven Chronic Myeloid Leukemia.
+## Short Repository Description
 
----
+MATLAB-based numerical simulation of BCR-ABL1 mRNA and protein/activity dynamics in Chronic Myeloid Leukemia, integrating Euler’s Method, ode45, and GEO gene expression analysis.
 
 ## Author
 
