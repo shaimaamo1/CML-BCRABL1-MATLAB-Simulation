@@ -12,6 +12,11 @@ This project presents a MATLAB-based computational and numerical simulation of *
 
 The biological focus of the project is based on the role of the **BCR-ABL1 gene** in CML, where its abnormal tyrosine kinase activity promotes excessive survival and growth of myeloid cells. The project also incorporates a treatment-response scenario using **tyrosine kinase inhibitor-like inhibition**, inspired by imatinib treatment data from the public GEO dataset **GSE33075**.
 
+## Team Members
+
+- **Shaimaa Mohamed El Haddad**
+- **Menatalla Essam**
+
 ## Project Aim
 
 The main aim of this project was to model **BCR-ABL1 mRNA and protein/activity dynamics** in:
@@ -131,8 +136,7 @@ This project demonstrated how numerical methods and computational biology can be
 
 MATLAB-based numerical simulation of BCR-ABL1 mRNA and protein/activity dynamics in Chronic Myeloid Leukemia, integrating Euler’s Method, ode45, and GEO gene expression analysis.
 
-## Author
+## Project Contributors
 
-**Shaimaa Mohamed El Haddad**  
-Biomedical Science Undergraduate  
-Computational Biology & Genomics Concentration
+- **Shaimaa Mohamed El Haddad** — Biomedical Science Undergraduate, Computational Biology & Genomics Concentration
+- **Menatalla Essam** — Project team member
